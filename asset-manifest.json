@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/position-sizing-calculator/static/css/main.3ccaef22.css",
-    "main.js": "/position-sizing-calculator/static/js/main.b198b131.js",
+    "main.css": "/position-sizing-calculator/static/css/main.1c0f9934.css",
+    "main.js": "/position-sizing-calculator/static/js/main.9ca9e7af.js",
     "static/js/453.2ff1cb52.chunk.js": "/position-sizing-calculator/static/js/453.2ff1cb52.chunk.js",
     "index.html": "/position-sizing-calculator/index.html",
-    "main.3ccaef22.css.map": "/position-sizing-calculator/static/css/main.3ccaef22.css.map",
-    "main.b198b131.js.map": "/position-sizing-calculator/static/js/main.b198b131.js.map",
+    "main.1c0f9934.css.map": "/position-sizing-calculator/static/css/main.1c0f9934.css.map",
+    "main.9ca9e7af.js.map": "/position-sizing-calculator/static/js/main.9ca9e7af.js.map",
     "453.2ff1cb52.chunk.js.map": "/position-sizing-calculator/static/js/453.2ff1cb52.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3ccaef22.css",
-    "static/js/main.b198b131.js"
+    "static/css/main.1c0f9934.css",
+    "static/js/main.9ca9e7af.js"
   ]
 }
