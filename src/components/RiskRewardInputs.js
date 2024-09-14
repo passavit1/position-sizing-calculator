@@ -10,15 +10,13 @@ function RiskRewardInputs({ numberOfEntries, riskRewards, setRiskRewards }) {
   return (
     <div className="form-section">
       {Array.from({ length: numberOfEntries }).map((_, index) => (
-        <div key={index}>
-          <label>
-            Position {index + 1} Risk:Reward:
-            <input
-              type="number"
-              value={riskRewards[index] || ""}
-              onChange={(e) => handleInputChange(index, e.target.value)}
-            />
-          </label>
+        <div key={index} className="risk-reward-row">
+          <label>Position {index + 1} Risk:Reward:</label>
+          <input
+            type="number"
+            value={riskRewards[index] || ""}
+            onChange={(e) => handleInputChange(index, e.target.value)}
+          />
         </div>
       ))}
     </div>
