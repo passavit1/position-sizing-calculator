@@ -3,16 +3,11 @@ import PriceInput from "./components/PriceInput";
 import NumberOfEntriesInput from "./components/NumberOfEntriesInput";
 import RiskRewardInputs from "./components/RiskRewardInputs";
 import ResultsDisplay from "./components/ResultsDisplay";
+import Tab2 from "./components/Tab2";
 import "./App.css";
 
-const getDecimalPlaces = (num) => {
-  if (!isNaN(num) && num.toString().includes(".")) {
-    return num.toString().split(".")[1].length;
-  }
-  return 0;
-};
-
 function App() {
+  const [currentTab, setCurrentTab] = useState("T1");
   const [TPPrice, setTPPrice] = useState("");
   const [SLPrice, setSLPrice] = useState("");
   const [maxLoss, setMaxLoss] = useState("");
@@ -28,8 +23,12 @@ function App() {
       const sl = parseFloat(SLPrice);
       const maxLossValue = parseFloat(maxLoss);
 
-      const tpDecimals = getDecimalPlaces(TPPrice);
-      const slDecimals = getDecimalPlaces(SLPrice);
+      const tpDecimals = TPPrice.includes(".")
+        ? TPPrice.split(".")[1].length
+        : 0;
+      const slDecimals = SLPrice.includes(".")
+        ? SLPrice.split(".")[1].length
+        : 0;
       const maxDecimals = Math.max(tpDecimals, slDecimals);
 
       const results = [];
@@ -66,7 +65,9 @@ function App() {
   };
 
   useEffect(() => {
-    calculatePositionSizing();
+    if (currentTab === "T1") {
+      calculatePositionSizing();
+    }
   }, [
     TPPrice,
     SLPrice,
@@ -75,42 +76,66 @@ function App() {
     tradeSide,
     maxLoss,
     calcType,
+    currentTab,
   ]);
 
   return (
-    <div className="main-container">
-      <div className="basic-input-container">
-        <h2>Basic Input</h2>
-        <PriceInput
-          TPPrice={TPPrice}
-          SLPrice={SLPrice}
-          maxLoss={maxLoss}
-          tradeSide={tradeSide}
-          calcType={calcType}
-          setTPPrice={setTPPrice}
-          setSLPrice={setSLPrice}
-          setMaxLoss={setMaxLoss}
-          setTradeSide={setTradeSide}
-          setCalcType={setCalcType}
-        />
-        <NumberOfEntriesInput
-          numberOfEntries={numberOfEntries}
-          setNumberOfEntries={setNumberOfEntries}
-          setRiskRewards={setRiskRewards}
-        />
+    <div className="app-container">
+      <div className="tab-navigation">
+        <button
+          onClick={() => setCurrentTab("T1")}
+          className={currentTab === "T1" ? "active" : ""}
+        >
+          T1
+        </button>
+        <button
+          onClick={() => setCurrentTab("T2")}
+          className={currentTab === "T2" ? "active" : ""}
+        >
+          T2
+        </button>
       </div>
-      <div className="risk-reward-inputs-container">
-        <h2>Risk Reward Inputs</h2>
-        <RiskRewardInputs
-          numberOfEntries={numberOfEntries}
-          riskRewards={riskRewards}
-          setRiskRewards={setRiskRewards}
-        />
-      </div>
-      <div className="results-container">
-        <h2>Position Sizing Results</h2>
-        <ResultsDisplay results={results} calcType={calcType} />
-      </div>
+      {currentTab === "T1" && (
+        <div className="main-container">
+          <div className="basic-input-container">
+            <h2>Basic Input</h2>
+            <PriceInput
+              TPPrice={TPPrice}
+              SLPrice={SLPrice}
+              maxLoss={maxLoss}
+              tradeSide={tradeSide}
+              calcType={calcType}
+              setTPPrice={setTPPrice}
+              setSLPrice={setSLPrice}
+              setMaxLoss={setMaxLoss}
+              setTradeSide={setTradeSide}
+              setCalcType={setCalcType}
+            />
+            <NumberOfEntriesInput
+              numberOfEntries={numberOfEntries}
+              setNumberOfEntries={setNumberOfEntries}
+              setRiskRewards={setRiskRewards}
+            />
+          </div>
+          <div className="risk-reward-inputs-container">
+            <h2>Risk Reward Inputs</h2>
+            <RiskRewardInputs
+              numberOfEntries={numberOfEntries}
+              riskRewards={riskRewards}
+              setRiskRewards={setRiskRewards}
+            />
+          </div>
+          <div className="results-container">
+            <h2>Position Sizing Results</h2>
+            <ResultsDisplay results={results} calcType={calcType} />
+          </div>
+        </div>
+      )}
+      {currentTab === "T2" && (
+        <div className="tab2-container">
+          <Tab2 />
+        </div>
+      )}
     </div>
   );
 }

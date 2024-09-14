@@ -88,7 +88,7 @@ label {
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 8px;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -120,4 +120,35 @@ button:hover {
 
 .risk-reward-row input {
   width: 100px;
+}
+
+/* Tab navigation */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-navigation button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab-navigation .active {
+  background-color: #ccc;
+}
+
+.tab2-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 360px;
+  min-height: 590px;
+}
+
+.tab2-content .results-container {
+  margin-top: 20px;
 }
