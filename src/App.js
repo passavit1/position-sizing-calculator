@@ -5,6 +5,13 @@ import RiskRewardInputs from "./components/RiskRewardInputs";
 import ResultsDisplay from "./components/ResultsDisplay";
 import "./App.css";
 
+const getDecimalPlaces = (num) => {
+  if (!isNaN(num) && num.toString().includes(".")) {
+    return num.toString().split(".")[1].length;
+  }
+  return 0;
+};
+
 function App() {
   const [TPPrice, setTPPrice] = useState("");
   const [SLPrice, setSLPrice] = useState("");
@@ -20,6 +27,10 @@ function App() {
       const tp = parseFloat(TPPrice);
       const sl = parseFloat(SLPrice);
       const maxLossValue = parseFloat(maxLoss);
+
+      const tpDecimals = getDecimalPlaces(TPPrice);
+      const slDecimals = getDecimalPlaces(SLPrice);
+      const maxDecimals = Math.max(tpDecimals, slDecimals);
 
       const results = [];
       for (let i = 0; i < numberOfEntries; i++) {
@@ -46,7 +57,7 @@ function App() {
         results.push({
           entry: i + 1,
           riskReward: riskRewardRatio,
-          entryPrice: entryPrice.toFixed(2),
+          entryPrice: entryPrice.toFixed(maxDecimals),
           positionSize: quantity.toFixed(2),
         });
       }
