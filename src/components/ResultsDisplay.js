@@ -3,7 +3,6 @@ import React from "react";
 function ResultsDisplay({ results }) {
   return (
     <div className="results">
-      <h2>Position Sizing Results</h2>
       <ul>
         {results.map((result) => (
           <li key={result.entry}>

@@ -14,30 +14,27 @@ body {
 .main-container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 20px; 
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.form-container {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 1;
-}
-
+.basic-input-container,
+.risk-reward-inputs-container,
 .results-container {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  flex: 0.5;
+  flex: 1; 
+  min-width: 250px;
 }
 
-.App h2 {
+.App h2,
+.basic-input-container h2,
+.risk-reward-inputs-container h2,
+.results-container h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
@@ -63,7 +60,7 @@ label {
   margin-bottom: 8px;
 }
 
-x.results {
+.results {
   margin-top: 20px;
 }
 

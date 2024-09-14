@@ -55,8 +55,8 @@ function App() {
 
   return (
     <div className="main-container">
-      <div className="form-container">
-        <h2>Position Sizing Calculator</h2>
+      <div className="basic-input-container">
+        <h2>Basic Input</h2>
         <PriceInput
           TPPrice={TPPrice}
           SLPrice={SLPrice}
@@ -72,6 +72,9 @@ function App() {
           setNumberOfEntries={setNumberOfEntries}
           setRiskRewards={setRiskRewards}
         />
+      </div>
+      <div className="risk-reward-inputs-container">
+        <h2>Risk Reward Inputs</h2>
         <RiskRewardInputs
           numberOfEntries={numberOfEntries}
           riskRewards={riskRewards}
@@ -79,6 +82,7 @@ function App() {
         />
       </div>
       <div className="results-container">
+        <h2>Position Sizing Results</h2>
         <ResultsDisplay results={results} />
       </div>
     </div>
