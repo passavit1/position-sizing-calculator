@@ -5,10 +5,12 @@ function PriceInput({
   SLPrice,
   maxLoss,
   tradeSide,
+  calcType,
   setTPPrice,
   setSLPrice,
   setMaxLoss,
   setTradeSide,
+  setCalcType,
 }) {
   return (
     <div className="form-section">
@@ -38,9 +40,19 @@ function PriceInput({
       </div>
       <div>
         <label>Trade Side:</label>
-        <select value={tradeSide} onChange={(e) => setTradeSide(e.target.value)}>
+        <select
+          value={tradeSide}
+          onChange={(e) => setTradeSide(e.target.value)}
+        >
           <option value="Long">Long</option>
           <option value="Short">Short</option>
+        </select>
+      </div>
+      <div>
+        <label>Calculation Type:</label>
+        <select value={calcType} onChange={(e) => setCalcType(e.target.value)}>
+          <option value="USD">USD</option>
+          <option value="Units">Units</option>
         </select>
       </div>
     </div>

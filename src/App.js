@@ -13,6 +13,7 @@ function App() {
   const [riskRewards, setRiskRewards] = useState([""]);
   const [results, setResults] = useState([]);
   const [tradeSide, setTradeSide] = useState("Long");
+  const [calcType, setCalcType] = useState("USD");
 
   const calculatePositionSizing = () => {
     if (TPPrice && SLPrice && numberOfEntries) {
@@ -33,9 +34,13 @@ function App() {
 
         let quantity;
         if (tradeSide === "Long") {
-          quantity = (maxLossPerEntry / Math.abs(sl - entryPrice)) * entryPrice;
+          quantity = maxLossPerEntry / Math.abs(sl - entryPrice);
         } else {
-          quantity = (maxLossPerEntry / Math.abs(entryPrice - sl)) * entryPrice;
+          quantity = maxLossPerEntry / Math.abs(entryPrice - sl);
+        }
+
+        if (calcType === "USD") {
+          quantity = quantity * entryPrice;
         }
 
         results.push({
@@ -51,7 +56,15 @@ function App() {
 
   useEffect(() => {
     calculatePositionSizing();
-  }, [TPPrice, SLPrice, numberOfEntries, riskRewards, tradeSide, maxLoss]);
+  }, [
+    TPPrice,
+    SLPrice,
+    numberOfEntries,
+    riskRewards,
+    tradeSide,
+    maxLoss,
+    calcType,
+  ]);
 
   return (
     <div className="main-container">
@@ -62,10 +75,12 @@ function App() {
           SLPrice={SLPrice}
           maxLoss={maxLoss}
           tradeSide={tradeSide}
+          calcType={calcType}
           setTPPrice={setTPPrice}
           setSLPrice={setSLPrice}
           setMaxLoss={setMaxLoss}
           setTradeSide={setTradeSide}
+          setCalcType={setCalcType}
         />
         <NumberOfEntriesInput
           numberOfEntries={numberOfEntries}
@@ -83,7 +98,7 @@ function App() {
       </div>
       <div className="results-container">
         <h2>Position Sizing Results</h2>
-        <ResultsDisplay results={results} />
+        <ResultsDisplay results={results} calcType={calcType} />
       </div>
     </div>
   );
