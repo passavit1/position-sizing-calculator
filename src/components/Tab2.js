@@ -1,33 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Tab2() {
   const [entryPrice, setEntryPrice] = useState("");
   const [calcType, setCalcType] = useState("USD");
   const [maxLoss, setMaxLoss] = useState("");
+  const [option, setOption] = useState("Percent");
+  const [sl, setSL] = useState("");
   const [riskReward, setRiskReward] = useState("");
   const [results, setResults] = useState(null);
 
+  useEffect(() => {
+    calculateTPAndSL();
+  }, [entryPrice, calcType, maxLoss, option, sl, riskReward]);
+
   const calculateTPAndSL = () => {
-    if (entryPrice && maxLoss && riskReward) {
+    if (entryPrice && maxLoss && sl && riskReward) {
       const ep = parseFloat(entryPrice);
       const maxLossValue = parseFloat(maxLoss);
       const rr = parseFloat(riskReward);
+      let slPrice;
 
-      const sl = ep - maxLossValue / ep;
-      const tp = ep + rr * (ep - sl);
+      if (option === "Percent") {
+        const slPercentage = parseFloat(sl);
+        slPrice = ep - ep * (slPercentage / 100);
+      } else {
+        slPrice = parseFloat(sl);
+      }
 
       let positionSize;
       if (calcType === "USD") {
-        positionSize = (maxLossValue / (ep - sl)) * ep;
+        positionSize = (maxLossValue / Math.abs(ep - slPrice)) * ep;
       } else {
-        positionSize = maxLossValue / (ep - sl);
+        positionSize = maxLossValue / Math.abs(ep - slPrice);
       }
 
+      const tpPrice = ep + Math.abs(ep - slPrice) * rr;
+
       setResults({
-        tp: tp.toFixed(8),
-        sl: sl.toFixed(8),
+        tp: tpPrice.toFixed(8),
+        sl: slPrice.toFixed(8),
         positionSize: positionSize.toFixed(2),
       });
+    } else {
+      setResults(null);
     }
   };
 
@@ -61,20 +76,34 @@ function Tab2() {
           />
         </div>
         <div>
-          <label>Risk:Reward:</label>
+          <label>SL Option:</label>
+          <select value={option} onChange={(e) => setOption(e.target.value)}>
+            <option value="Percent">Percent</option>
+            <option value="Price">Price</option>
+          </select>
+        </div>
+        <div>
+          <label>{option === "Percent" ? "SL (%):" : "SL Price:"}</label>
+          <input
+            type="number"
+            value={sl}
+            onChange={(e) => setSL(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Risk:Reward (R:R):</label>
           <input
             type="number"
             value={riskReward}
             onChange={(e) => setRiskReward(e.target.value)}
           />
         </div>
-        <button onClick={calculateTPAndSL}>Calculate</button>
       </div>
       {results && (
         <div className="results-container">
           <h2>Results</h2>
-          <p>TP: {results.tp}</p>
-          <p>SL: {results.sl}</p>
+          <p>TP Price: {results.tp}</p>
+          <p>SL Price: {results.sl}</p>
           <p>
             Position Size: {results.positionSize} {calcType}
           </p>

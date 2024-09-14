@@ -86,13 +86,13 @@ function App() {
           onClick={() => setCurrentTab("T1")}
           className={currentTab === "T1" ? "active" : ""}
         >
-          T1
+          Calculate Entry Price & Position Size
         </button>
         <button
           onClick={() => setCurrentTab("T2")}
           className={currentTab === "T2" ? "active" : ""}
         >
-          T2
+          Calculate TP & Position Size
         </button>
       </div>
       {currentTab === "T1" && (

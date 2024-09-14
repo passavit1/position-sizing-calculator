@@ -127,17 +127,29 @@ button:hover {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  gap: 10px;
 }
 
 .tab-navigation button {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: #e0e0e0;
+  border: 1px solid #bbb;
+  color: #333;
   padding: 10px 20px;
   cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-navigation button:hover {
+  background-color: #d1d1d1;
+  color: #000;
 }
 
 .tab-navigation .active {
-  background-color: #ccc;
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
 }
 
 .tab2-content {
