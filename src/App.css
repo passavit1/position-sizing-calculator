@@ -14,7 +14,7 @@ body {
 .main-container {
   display: flex;
   flex-direction: row;
-  gap: 20px; 
+  gap: 20px;
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
@@ -27,8 +27,14 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 1; 
+  flex: 1;
   min-width: 250px;
+}
+
+.risk-reward-inputs-container,
+.results-container {
+  max-height: 500px;
+  overflow-y: auto; 
 }
 
 .App h2,
